@@ -12,6 +12,7 @@ namespace To_Do_List
     {
         static void Menu()
         {
+            
             while (true)
             {
 
@@ -29,7 +30,14 @@ namespace To_Do_List
 
                 if (choice == 1)
                 {
-                    AddIteam(team:Iteam);
+                    Console.Write("Enter name: ");
+                    string name = Console.ReadLine();
+
+                    Console.Write("Enter description: ");
+                    string desc = Console.ReadLine();
+                    
+                    Iteam item = new Iteam(name, desc);
+                    AddIteam(item);
                 }
                 else if (choice == 2)
                 {
