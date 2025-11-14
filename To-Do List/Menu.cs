@@ -52,11 +52,11 @@ namespace To_Do_List
                 }
                 else if (choice == 4)
                 {
-
+                    ReadIteams();
                 }
                 else if (choice == 5)
                 {
-
+                    
                 }
                 else if (choice == 6)
                 {

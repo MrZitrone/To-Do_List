@@ -39,7 +39,10 @@ namespace To_Do_List
     {
         static void AddIteam(Iteam team)
         {
-
+            if (team.Id == 0)
+            {
+                team.Id = 1;
+            }
             Console.Clear();
             Console.WriteLine($"{team.Id} - {team.isDone} - {team.Name} - {team.Description} - {team.Created}-{team.Updated}");
 
