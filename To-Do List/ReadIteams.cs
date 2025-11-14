@@ -65,8 +65,7 @@ namespace To_Do_List
                 item.isDone = isDone;
                 item.Created = created;
                 item.Updated = updated;
-                item.IsDeleted = isDeleted;
-                item.Deleted = deleted;
+
 
                 items.Add(item);
             }

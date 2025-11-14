@@ -16,8 +16,7 @@ namespace To_Do_List
         public string Description { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime Deleted { get; set; }
+
         
         public Iteam(string name, string description)
         {
@@ -26,7 +25,6 @@ namespace To_Do_List
             isDone = false;
             Created = DateTime.Now;
             Updated = DateTime.Now;
-            IsDeleted = false;
         }
 
         public string ToFileString()
@@ -69,7 +67,6 @@ namespace To_Do_List
 
     partial class main
     {
-        // Variante: Du übergibst ein fertiges Iteam
         static void AddIteam(Iteam team)
         {
             Console.Clear();
