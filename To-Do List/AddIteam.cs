@@ -31,29 +31,64 @@ namespace To_Do_List
 
         public string ToFileString()
         {
-            return$"{Id}|{isDone}|{Name}|{Description}|{Created}|{Updated}";
+            return $"{Id}|{isDone}|{Name}|{Description}|{Created}|{Updated}";
+        }
+        
+        public static int GetNextId()
+        {
+            string path = "items.txt";
+
+            if (!File.Exists(path))
+                return 1; // erste ID
+
+            string[] lines = File.ReadAllLines(path);
+            int maxId = 0;
+
+            foreach (string line in lines)
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+
+                string[] parts = line.Split('|');
+
+                if (parts.Length == 0)
+                    continue;
+
+                if (int.TryParse(parts[0], out int id))
+                {
+                    if (id > maxId)
+                        maxId = id;
+                }
+            }
+
+            return maxId + 1;
         }
     }
+    
+    
 
     partial class main
     {
+        // Variante: Du übergibst ein fertiges Iteam
         static void AddIteam(Iteam team)
         {
-            if (team.Id == 0)
-            {
-                team.Id = 1;
-            }
             Console.Clear();
-            Console.WriteLine($"{team.Id} - {team.isDone} - {team.Name} - {team.Description} - {team.Created}-{team.Updated}");
 
+            // ➜ ID zuerst setzen
+            team.Id = Iteam.GetNextId();
+
+            // dann anzeigen
+            Console.WriteLine($"{team.Id} - {team.isDone} - {team.Name} - {team.Description} - {team.Created}-{team.Updated}");
             
+            // in Datei schreiben
             File.AppendAllText("items.txt", team.ToFileString() + Environment.NewLine);
             
+            Console.WriteLine(new string('=',80));
             Console.WriteLine("File is saved!");
             Console.ReadLine();
             Menu();
-
         }
+
 
 
 

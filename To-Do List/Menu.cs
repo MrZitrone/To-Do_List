@@ -22,12 +22,19 @@ namespace To_Do_List
                 Console.WriteLine("2) Edit Item");
                 Console.WriteLine("3) Delete Item");
                 Console.WriteLine("4) Show All Items");
-                Console.WriteLine("5) Save Item");
-                Console.WriteLine("6) Exit");
+                Console.WriteLine("5) Exit");
                 Console.WriteLine(new string('=', 50));
                 Console.Write("Choose an option: ");
 
-                int choice = Convert.ToInt32(Console.ReadLine());
+                string input = Console.ReadLine();
+
+                if (!int.TryParse(input, out int choice))
+                {
+                    Console.WriteLine("Invalid Input!");
+                    Console.ReadKey();
+                    Console.Clear();
+                    Menu();
+                }
 
                 if (choice == 1)
                 {
@@ -48,21 +55,18 @@ namespace To_Do_List
                 }
                 else if (choice == 3)
                 {
-
+                    DeleteIteam();
                 }
                 else if (choice == 4)
                 {
                     ReadIteams();
                 }
+
                 else if (choice == 5)
-                {
-                    
-                }
-                else if (choice == 6)
                 {
                     System.Environment.Exit(0);
                 }
-                else if (choice > 6)
+                else if (choice > 5)
                 {
                     Console.Clear();
                     Console.WriteLine("Ungültige Eingabe");
