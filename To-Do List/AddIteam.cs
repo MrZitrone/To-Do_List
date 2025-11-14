@@ -75,7 +75,7 @@ namespace To_Do_List
             team.Id = Iteam.GetNextId();
 
             // dann anzeigen
-            Console.WriteLine($"{team.Id} - {team.isDone} - {team.Name} - {team.Description} - {team.Created}-{team.Updated}");
+            Console.WriteLine($"{team.Id} - {team.isDone} - {team.Name} - {team.Description} - {team.Created}");
             
             // in Datei schreiben
             File.AppendAllText("items.txt", team.ToFileString() + Environment.NewLine);

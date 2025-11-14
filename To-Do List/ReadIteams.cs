@@ -80,7 +80,7 @@ namespace To_Do_List
 
             foreach (var item in items)
             {
-                Console.WriteLine($"{item.Id} - {item.Name} - {item.Description} - Done: {item.isDone}");
+                Console.WriteLine($"{item.Id} - {item.Name} - {item.Description} - Done: {item.isDone}-{item.Created}");
             }
 
             Console.ReadLine();
