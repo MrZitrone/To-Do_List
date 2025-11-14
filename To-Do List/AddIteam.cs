@@ -28,19 +28,33 @@ namespace To_Do_List
             Updated = DateTime.Now;
             IsDeleted = false;
         }
+
+        public string ToFileString()
+        {
+            return$"{Id}|{isDone}|{Name}|{Description}|{Created}|{Updated}";
+        }
     }
 
     partial class main
     {
         static void AddIteam(Iteam team)
         {
-            while (true)
-            {
-                Console.Clear();
-                Console.WriteLine($"{team.Id} - {team.Name} - {team.Description}");
-            }
+
+            Console.Clear();
+            Console.WriteLine($"{team.Id} - {team.isDone} - {team.Name} - {team.Description} - {team.Created}-{team.Updated}");
+
+            
+            File.AppendAllText("items.txt", team.ToFileString() + Environment.NewLine);
+            
+            Console.WriteLine("File is saved!");
+            Console.ReadLine();
+            Menu();
 
         }
 
+
+
     }
+    
+    
 }

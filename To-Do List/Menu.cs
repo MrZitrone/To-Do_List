@@ -15,24 +15,27 @@ namespace To_Do_List
             
             while (true)
             {
-
-                Console.Write(new string('-', 40));
-
-                Console.WriteLine("To Do List");    
+                Console.Clear();
+                
+                Console.WriteLine(new string('=', 20) + "To Do List" + new string('=', 20));    
                 Console.WriteLine("1) Add New Item");
                 Console.WriteLine("2) Edit Item");
                 Console.WriteLine("3) Delete Item");
                 Console.WriteLine("4) Show All Items");
                 Console.WriteLine("5) Save Item");
                 Console.WriteLine("6) Exit");
+                Console.WriteLine(new string('=', 50));
+                Console.Write("Choose an option: ");
 
                 int choice = Convert.ToInt32(Console.ReadLine());
 
                 if (choice == 1)
                 {
+                    Console.Clear();
                     Console.Write("Enter name: ");
                     string name = Console.ReadLine();
 
+                    Console.Clear();
                     Console.Write("Enter description: ");
                     string desc = Console.ReadLine();
                     
