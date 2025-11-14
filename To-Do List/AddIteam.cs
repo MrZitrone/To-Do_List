@@ -16,8 +16,7 @@ namespace To_Do_List
         public string Description { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime Deleted { get; set; }
+
         
         public Iteam(string name, string description)
         {
@@ -26,21 +25,71 @@ namespace To_Do_List
             isDone = false;
             Created = DateTime.Now;
             Updated = DateTime.Now;
-            IsDeleted = false;
+        }
+
+        public string ToFileString()
+        {
+            return $"{Id}|{isDone}|{Name}|{Description}|{Created}|{Updated}";
+        }
+        
+        public static int GetNextId()
+        {
+            string path = "items.txt";
+
+            if (!File.Exists(path))
+                return 1; // erste ID
+
+            string[] lines = File.ReadAllLines(path);
+            int maxId = 0;
+
+            foreach (string line in lines)
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+
+                string[] parts = line.Split('|');
+
+                if (parts.Length == 0)
+                    continue;
+
+                if (int.TryParse(parts[0], out int id))
+                {
+                    if (id > maxId)
+                        maxId = id;
+                }
+            }
+
+            return maxId + 1;
         }
     }
+    
+    
 
     partial class main
     {
         static void AddIteam(Iteam team)
         {
-            while (true)
-            {
-                Console.Clear();
-                Console.WriteLine($"{team.Id} - {team.Name} - {team.Description}");
-            }
+            Console.Clear();
 
+            // ➜ ID zuerst setzen
+            team.Id = Iteam.GetNextId();
+
+            // dann anzeigen
+            Console.WriteLine($"{team.Id} - {team.isDone} - {team.Name} - {team.Description} - {team.Created}");
+            
+            // in Datei schreiben
+            File.AppendAllText("items.txt", team.ToFileString() + Environment.NewLine);
+            
+            Console.WriteLine(new string('=',80));
+            Console.WriteLine("File is saved!");
+            Console.ReadLine();
+            Menu();
         }
 
+
+
+
     }
+    
+    
 }

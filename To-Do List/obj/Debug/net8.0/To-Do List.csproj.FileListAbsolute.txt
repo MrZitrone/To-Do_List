@@ -27,3 +27,18 @@ G:\JetBrains Projects\To-Do List\To-Do List\obj\Debug\net8.0\To-Do List.pdb
 G:\JetBrains Projects\To-Do List\To-Do List\obj\Debug\net8.0\To-Do List.genruntimeconfig.cache
 G:\JetBrains Projects\To-Do List\To-Do List\obj\Debug\net8.0\ref\To-Do List.dll
 G:\JetBrains Projects\To-Do List\To-Do List\obj\Debug\net8.0\To-Do List.sourcelink.json
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\bin\Debug\net8.0\To-Do List.exe
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\bin\Debug\net8.0\To-Do List.deps.json
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\bin\Debug\net8.0\To-Do List.runtimeconfig.json
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\bin\Debug\net8.0\To-Do List.dll
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\bin\Debug\net8.0\To-Do List.pdb
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\obj\Debug\net8.0\To-Do List.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\obj\Debug\net8.0\To-Do List.AssemblyInfoInputs.cache
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\obj\Debug\net8.0\To-Do List.AssemblyInfo.cs
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\obj\Debug\net8.0\To-Do List.csproj.CoreCompileInputs.cache
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\obj\Debug\net8.0\To-Do List.sourcelink.json
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\obj\Debug\net8.0\To-Do List.dll
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\obj\Debug\net8.0\refint\To-Do List.dll
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\obj\Debug\net8.0\To-Do List.pdb
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\obj\Debug\net8.0\To-Do List.genruntimeconfig.cache
+C:\Users\Anwender\RiderProjects\To-Do_List\To-Do List\obj\Debug\net8.0\ref\To-Do List.dll
