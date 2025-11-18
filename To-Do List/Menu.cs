@@ -38,16 +38,7 @@ namespace To_Do_List
 
                 if (choice == 1)
                 {
-                    Console.Clear();
-                    Console.Write("Enter name: ");
-                    string name = Console.ReadLine();
-
-                    Console.Clear();
-                    Console.Write("Enter description: ");
-                    string desc = Console.ReadLine();
-                    
-                    Iteam item = new Iteam(name, desc);
-                    AddIteam(item);
+                    AddIteam();
                 }
                 else if (choice == 2)
                 {
@@ -69,7 +60,7 @@ namespace To_Do_List
                 else if (choice > 5)
                 {
                     Console.Clear();
-                    Console.WriteLine("Ungültige Eingabe");
+                    Console.WriteLine("Invalid Input!");
                     Thread.Sleep(2000);
                     Console.Clear();
                     Menu();
