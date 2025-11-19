@@ -15,7 +15,7 @@ namespace To_Do_List
         static void DeleteIteam()
         {
             Console.Clear();
-            List<Iteam> items = LoadItems();
+            List<Iteam> items = _service.GetAll();
 
             if (items.Count == 0)
             {
@@ -31,9 +31,16 @@ namespace To_Do_List
             }
 
             Console.WriteLine(new string('=', 80));
+            Console.WriteLine("To go back just press Enter (without input)!");
             Console.Write("Choose which item to delete by ID: ");
-
             string input = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                Menu();
+                return;
+            }
+
             if (!int.TryParse(input, out int chosenId))
             {
                 Console.WriteLine("Invalid ID!");
@@ -42,45 +49,20 @@ namespace To_Do_List
                 return;
             }
 
-            Iteam itemToDelete = null;
+            bool success = _service.Delete(chosenId);
 
-            foreach (var it in items)
-            {
-                if (it.Id == chosenId)
-                {
-                    itemToDelete = it;
-                    break;
-                }
-            }
-
-            if (itemToDelete == null)
+            if (!success)
             {
                 Console.WriteLine("No item with that ID exists!");
-                Console.ReadLine();
-                Menu();
-                return;
+            }
+            else
+            {
+                Console.WriteLine($"Item {chosenId} deleted.");
             }
 
-            items.Remove(itemToDelete);
-
-            RewriteItemsFile(items);
-
-            Console.WriteLine($"Item {chosenId} deleted.");
             Console.ReadLine();
             Menu();
         }
-        static void RewriteItemsFile(List<Iteam> items)
-        {
-            string path = "items.txt";
 
-            // overwrite file
-            using (StreamWriter writer = new StreamWriter(path, false))
-            {
-                foreach (var item in items)
-                {
-                    writer.WriteLine(item.ToFileString());
-                }
-            }
-        }
     }
 }

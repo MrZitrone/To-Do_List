@@ -1,0 +1,90 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace To_Do_List
+{
+    public class ItemService
+    {
+        private readonly ItemRepository _repository;
+
+        public ItemService(ItemRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public List<Iteam> GetAll()
+        {
+            return _repository.LoadItems();
+        }
+
+        public Iteam Add(string name, string description)
+        {
+            var items = _repository.LoadItems();
+            int nextId = _repository.GetNextId();
+
+            Iteam newItem = new Iteam(name, description);
+            newItem.Id = nextId;
+
+            items.Add(newItem);
+            _repository.SaveAll(items);
+
+            return newItem;
+        }
+
+        public bool Delete(int id)
+        {
+            var items = _repository.LoadItems();
+            var item = items.FirstOrDefault(i => i.Id == id);
+
+            if (item == null)
+                return false;
+
+            items.Remove(item);
+            _repository.SaveAll(items);
+            return true;
+        }
+
+        public bool UpdateName(int id, string newName)
+        {
+            var items = _repository.LoadItems();
+            var item = items.FirstOrDefault(i => i.Id == id);
+
+            if (item == null)
+                return false;
+
+            item.Name = newName;
+            item.Updated = DateTime.Now;
+            _repository.SaveAll(items);
+            return true;
+        }
+
+        public bool UpdateDescription(int id, string newDescription)
+        {
+            var items = _repository.LoadItems();
+            var item = items.FirstOrDefault(i => i.Id == id);
+
+            if (item == null)
+                return false;
+
+            item.Description = newDescription;
+            item.Updated = DateTime.Now;
+            _repository.SaveAll(items);
+            return true;
+        }
+
+        public bool UpdateDoneStatus(int id, bool isDone)
+        {
+            var items = _repository.LoadItems();
+            var item = items.FirstOrDefault(i => i.Id == id);
+
+            if (item == null)
+                return false;
+
+            item.isDone = isDone;
+            item.Updated = DateTime.Now;
+            _repository.SaveAll(items);
+            return true;
+        }
+    }
+}
