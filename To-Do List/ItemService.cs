@@ -13,17 +13,17 @@ namespace To_Do_List
             _repository = repository;
         }
 
-        public List<Iteam> GetAll()
+        public List<Item> GetAll()
         {
             return _repository.LoadItems();
         }
 
-        public Iteam Add(string name, string description)
+        public Item Add(string name, string description)
         {
             var items = _repository.LoadItems();
             int nextId = _repository.GetNextId();
 
-            Iteam newItem = new Iteam(name, description);
+            Item newItem = new Item(name, description);
             newItem.Id = nextId;
 
             items.Add(newItem);
@@ -73,7 +73,7 @@ namespace To_Do_List
             return true;
         }
 
-        public bool UpdateDoneStatus(int id, bool isDone)
+        public bool UpdateDoneStatus(int id, bool IsDone)
         {
             var items = _repository.LoadItems();
             var item = items.FirstOrDefault(i => i.Id == id);
@@ -81,7 +81,7 @@ namespace To_Do_List
             if (item == null)
                 return false;
 
-            item.isDone = isDone;
+            item.IsDone = IsDone;
             item.Updated = DateTime.Now;
             _repository.SaveAll(items);
             return true;

@@ -2,11 +2,12 @@
 
 namespace To_Do_List
 {
-	partial class main
-	{
-		static void Main(string[] args)
-		{
-			Menu();
-		}
-	}
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ConsoleUI ui = new ConsoleUI();
+            ui.Run();
+        }
+    }
 }
