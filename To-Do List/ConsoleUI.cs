@@ -256,7 +256,7 @@ namespace To_Do_List
                 Console.WriteLine("Invalid input. Please answer y or n.");
             }
         }
-
+        
         private void WaitForUser()
         {
             Console.WriteLine("Press Enter to continue...");
