@@ -52,16 +52,16 @@ namespace To_Do_List
         private void AddItem()
         {
             Console.Clear();
-            Console.Write("Name: ");
-            string name = Console.ReadLine();
+            Console.Write("Tag: ");
+            string tag = Console.ReadLine();
 
             Console.Write("Description: ");
             string desc = Console.ReadLine();
 
-            Item newItem = _service.Add(name, desc);
+            Item newItem = _service.Add(tag, desc);
 
             Console.WriteLine();
-            Console.WriteLine($"{newItem.Id} - {newItem.IsDone} - {newItem.Name} - {newItem.Description} - {newItem.Created}");
+            Console.WriteLine($"{newItem.Id} - {newItem.IsDone} - {newItem.Tag} - {newItem.Description} - {newItem.Created}");
             Console.WriteLine(new string('=', 80));
             Console.WriteLine("File is saved!");
             WaitForUser();
@@ -86,7 +86,7 @@ namespace To_Do_List
             Console.Clear();
             Console.WriteLine($"Editing Item ID: {chosenId}");
             Console.WriteLine("What do you want to edit?");
-            Console.WriteLine("1 - Name");
+            Console.WriteLine("1 - Tag");
             Console.WriteLine("2 - Description");
             Console.WriteLine("3 - Done status (IsDone)");
             
@@ -96,9 +96,9 @@ namespace To_Do_List
             switch (editChoice)
             {
                 case 1:
-                    Console.Write("Change Name: ");
-                    string newName = Console.ReadLine();
-                    result = _service.UpdateName(chosenId.Value, newName);
+                    Console.Write("Change Tag: ");
+                    string newTag = Console.ReadLine();
+                    result = _service.UpdateTag(chosenId.Value, newTag);
                     break;
 
                 case 2:
@@ -190,7 +190,7 @@ namespace To_Do_List
 
                 foreach (var item in pageItems)
                 {
-                    Console.WriteLine($"{item.Id} - {item.Name} - {item.Description} - Done:{item.IsDone} -- {item.Created}");
+                    Console.WriteLine($"{item.Id} - {item.Tag} - {item.Description} - Done:{item.IsDone} -- {item.Created}");
                 }
 
                 Console.WriteLine(new string('=', 80));

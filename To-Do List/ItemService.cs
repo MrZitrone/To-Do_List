@@ -18,12 +18,12 @@ namespace To_Do_List
             return _repository.LoadItems();
         }
 
-        public Item Add(string name, string description)
+        public Item Add(string tag, string description)
         {
             var items = _repository.LoadItems();
             int nextId = _repository.GetNextId();
 
-            Item newItem = new Item(name, description);
+            Item newItem = new Item(tag, description);
             newItem.Id = nextId;
 
             items.Add(newItem);
@@ -45,7 +45,7 @@ namespace To_Do_List
             return true;
         }
 
-        public bool UpdateName(int id, string newName)
+        public bool UpdateTag(int id, string newTag)
         {
             var items = _repository.LoadItems();
             var item = items.FirstOrDefault(i => i.Id == id);
@@ -53,7 +53,7 @@ namespace To_Do_List
             if (item == null)
                 return false;
 
-            item.Name = newName;
+            item.Tag = newTag;
             item.Updated = DateTime.Now;
             _repository.SaveAll(items);
             return true;

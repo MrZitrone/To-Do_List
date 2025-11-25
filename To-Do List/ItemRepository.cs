@@ -20,40 +20,27 @@ namespace To_Do_List
             if (!File.Exists(path))
                 return items;
 
-            string[] lines = File.ReadAllLines(path);
-
-            foreach (string line in lines)
+            try
             {
-                if (string.IsNullOrWhiteSpace(line))
-                    continue;
+                string[] lines = File.ReadAllLines(path);
+                int currentId = 1; // Start IDs from 1
 
-                string[] parts = line.Split('|');
+                foreach (string line in lines)
+                {
+                    if (string.IsNullOrWhiteSpace(line))
+                        continue;
 
-                if (parts.Length < 4)
-                    continue;
-
-                int.TryParse(parts[0], out int id);
-                bool.TryParse(parts[1], out bool IsDone);
-
-                string name = parts[2];
-                string desc = parts[3];
-
-                DateTime created = DateTime.Now;
-                DateTime updated = DateTime.Now;
-
-                if (parts.Length > 4)
-                    DateTime.TryParse(parts[4], out created);
-
-                if (parts.Length > 5)
-                    DateTime.TryParse(parts[5], out updated);
-
-                Item item = new Item(name, desc);
-                item.Id = id;
-                item.IsDone = IsDone;
-                item.Created = created;
-                item.Updated = updated;
-
-                items.Add(item);
+                    Item item = DeserializeItem(line);
+                    if (item != null)
+                    {
+                        item.Id = currentId++; // Assign ID in memory NEW
+                        items.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading items: {ex.Message}");
             }
 
             return items;
@@ -61,45 +48,100 @@ namespace To_Do_List
 
         public void SaveAll(List<Item> items)
         {
-            using (StreamWriter writer = new StreamWriter(path, false))
+            try
             {
-                foreach (var item in items)
+                using (StreamWriter writer = new StreamWriter(path, false))
                 {
-                    writer.WriteLine(item.ToFileString());
+                    foreach (var item in items)
+                    {
+                        writer.WriteLine(SerializeItem(item));
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving items: {ex.Message}");
             }
         }
 
         public void Append(Item item)
         {
-            File.AppendAllText(path, item.ToFileString() + Environment.NewLine);
+            try
+            {
+                File.AppendAllText(path, SerializeItem(item) + Environment.NewLine);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error appending item: {ex.Message}");
+            }
         }
 
         public int GetNextId()
         {
+            // Count the number of items in the file to determine next ID
             if (!File.Exists(path))
                 return 1;
 
-            string[] lines = File.ReadAllLines(path);
-            int maxId = 0;
-
-            foreach (string line in lines)
+            try
             {
-                if (string.IsNullOrWhiteSpace(line))
-                    continue;
+                string[] lines = File.ReadAllLines(path);
+                int count = 0;
 
-                string[] parts = line.Split('|');
-                if (parts.Length == 0)
-                    continue;
-
-                if (int.TryParse(parts[0], out int id))
+                foreach (string line in lines)
                 {
-                    if (id > maxId)
-                        maxId = id;
+                    if (!string.IsNullOrWhiteSpace(line))
+                        count++;
                 }
-            }
 
-            return maxId + 1;
+                return count + 1;
+            }
+            catch (Exception)
+            {
+                return 1;
+            }
+        }
+
+        private string SerializeItem(Item item)
+        {
+            // ID is not saved to file anymore
+            return $"{item.IsDone}|{item.Tag}|{item.Description}|{item.Created}|{item.Updated}";
+        }
+
+        private Item DeserializeItem(string line)
+        {
+            try
+            {
+                string[] parts = line.Split('|');
+
+                if (parts.Length < 3)
+                    return null;
+
+                bool.TryParse(parts[0], out bool IsDone);
+
+                string tag = parts[1];
+                string desc = parts[2];
+
+                DateTime created = DateTime.Now;
+                DateTime updated = DateTime.Now;
+
+                if (parts.Length > 3)
+                    DateTime.TryParse(parts[3], out created);
+
+                if (parts.Length > 4)
+                    DateTime.TryParse(parts[4], out updated);
+
+                Item item = new Item(tag, desc);
+                // ID will be assigned in LoadItems()
+                item.IsDone = IsDone;
+                item.Created = created;
+                item.Updated = updated;
+
+                return item;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
