@@ -39,7 +39,7 @@ namespace To_Do_List
 
             if (item == null)
                 return false;
-
+    
             items.Remove(item);
             _repository.SaveAll(items);
             return true;
