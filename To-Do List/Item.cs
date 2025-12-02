@@ -1,5 +1,3 @@
-using System;
-
 namespace To_Do_List
 {
     public class Item

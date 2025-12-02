@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-
 namespace To_Do_List
 {
-    public class ConsoleUI
+    public class ConsoleUi
     {
         private readonly ItemService _service;
 
-        public ConsoleUI()
+        public ConsoleUi()
         {
             _service = new ItemService(new ItemRepository());
         }
@@ -24,10 +19,11 @@ namespace To_Do_List
                 Console.WriteLine("2) Edit Item");
                 Console.WriteLine("3) Delete Item");
                 Console.WriteLine("4) Show All Items");
-                Console.WriteLine("5) Exit");
+                Console.WriteLine("5) Search Items");
+                Console.WriteLine("6) Exit");
                 Console.WriteLine(new string('=', 50));
 
-                int choice = GetValidInt("Choose an option: ", 1, 5);
+                int choice = GetValidInt("Choose an option: ", 1, 6);
 
                 switch (choice)
                 {
@@ -44,6 +40,9 @@ namespace To_Do_List
                         ReadItems();
                         break;
                     case 5:
+                        Search();
+                        break;
+                    case 6:
                         return;
                 }
             }
@@ -166,6 +165,49 @@ namespace To_Do_List
                 return;
             }
             ShowPagedList(items, allowSelection: false);
+        }
+
+        private void Search()
+        {
+
+            Console.WriteLine("1 - Tag");
+            Console.WriteLine("2 - Description");
+            Console.WriteLine("3 - Done status (IsDone)");
+            
+            int getChoice = GetValidInt("Choice: ", 0, 3);
+            bool result = false;
+
+            string searchTerm = "";
+            
+            switch (getChoice)
+            {
+                case 1:
+                    Console.WriteLine("Enter search partition: ");
+                    searchTerm = Console.ReadLine(); 
+                    break;
+                case 2:
+                    Console.WriteLine("Enter search partition: ");
+                    searchTerm = Console.ReadLine();
+                    break;
+                case 3:
+                    Console.WriteLine("Enter search partition: ");
+                    searchTerm = Console.ReadLine();
+                    break;
+                default:
+                    break;
+            }
+
+            List<Item> searchResults = _service.Search(searchTerm, getChoice);
+
+            if (searchResults.Count == 0)
+            {
+                Console.Clear();
+                Console.WriteLine("No items found.");
+                WaitForUser();
+                return;
+            }
+            ShowPagedList(searchResults, allowSelection: false);
+            WaitForUser();
         }
 
         // --- Helper Methods ---
