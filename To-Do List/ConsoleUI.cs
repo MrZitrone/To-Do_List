@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-
 namespace To_Do_List
 {
-    public class ConsoleUI
+    public class ConsoleUi
     {
         private readonly ItemService _service;
 
-        public ConsoleUI()
+        public ConsoleUi()
         {
             _service = new ItemService(new ItemRepository());
         }

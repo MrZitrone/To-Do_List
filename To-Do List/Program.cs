@@ -6,7 +6,7 @@ namespace To_Do_List
     {
         static void Main(string[] args)
         {
-            ConsoleUI ui = new ConsoleUI();
+            ConsoleUi ui = new ConsoleUi();
             ui.Run();
         }
     }
