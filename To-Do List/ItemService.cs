@@ -86,5 +86,25 @@ namespace To_Do_List
             _repository.SaveAll(items);
             return true;
         }
+
+        public List<Item> Search(string searchTerm, int getChoice)
+        {
+            if (getChoice == 1)
+            {
+                var items = _repository.LoadItems();
+                return items.Where(i => i.Tag.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            else if (getChoice == 2)
+            {
+                var items = _repository.LoadItems();
+                return items.Where(i => i.Description.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            else if (getChoice == 3)
+            {
+                var items = _repository.LoadItems();
+                return items.Where(i => i.IsDone.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            return null;
+        }
     }
 }
