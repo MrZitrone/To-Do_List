@@ -2,6 +2,8 @@ namespace To_Do_List
 {
     public class Item
     {
+        
+        // Basically a DataBase like file nothing else
         public int Id { get; set; }
         public bool IsDone { get; set; }
         public string Tag { get; set; }

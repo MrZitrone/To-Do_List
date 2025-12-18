@@ -48,8 +48,13 @@ namespace To_Do_List
             }
         }
 
+        
+        // Basic functions (Like input and read what has been entered and what to be shown.)
+        // Follow up for all the availabel option in the App
         private void AddItem()
         {
+            
+            
             Console.Clear();
             Console.Write("Tag: ");
             string tag = Console.ReadLine();
@@ -82,6 +87,7 @@ namespace To_Do_List
 
             if (chosenId == null) return; // User went back
 
+            // Selection for the specific target that wants to be changed.
             Console.Clear();
             Console.WriteLine($"Editing Item ID: {chosenId}");
             Console.WriteLine("What do you want to edit?");
@@ -111,7 +117,9 @@ namespace To_Do_List
                     result = _service.UpdateDoneStatus(chosenId.Value, isDone);
                     break;
             }
-
+            
+            // Check if the following ID/Iteam exists in the first place.
+            // Same goes for any other that has any way of ID to be chosen.
             if (!result)
             {
                 Console.WriteLine("No item with that ID exists.");
@@ -213,19 +221,21 @@ namespace To_Do_List
         // --- Helper Methods ---
 
 
-        //AI generated code Start
+        //AI generated (Edited by me) code Start
         private int? ShowPagedList(List<Item> items, bool allowSelection)
         {
+            
+            // Max amount of possible Iteams to be shown. 10 can be changed.
             const int pageSize = 10;
-            int currentPage = 1;
+            int currentPage = 1; // starter page
 
             while (true)
             {
                 Console.Clear();
                 int totalPages = (int)Math.Ceiling((double)items.Count / pageSize);
-                if (totalPages == 0) totalPages = 1;
+                if (totalPages == 0) totalPages = 1; // So it doesn't start with an empty page
 
-                var pageItems = items.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                var pageItems = items.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList(); // Converts the List of Iteams in to pages
 
                 Console.WriteLine($"Page {currentPage} of {totalPages}");
                 Console.WriteLine(new string('-', 80));
@@ -245,6 +255,8 @@ namespace To_Do_List
                 Console.Write("Action: ");
                 string input = Console.ReadLine()?.Trim().ToUpper();
 
+                
+                // Basic page change
                 if (input == "N")
                 {
                     if (currentPage < totalPages) currentPage++;
@@ -269,6 +281,7 @@ namespace To_Do_List
 
         //AI generated code End
 
+        // Check if the following Input is correct
         private int GetValidInt(string prompt, int min, int max)
         {
             while (true)
@@ -285,6 +298,7 @@ namespace To_Do_List
             }
         }
 
+        // It's for the the yes or no input
         private bool GetYesNo(string prompt)
         {
             while (true)
@@ -299,6 +313,7 @@ namespace To_Do_List
             }
         }
         
+        // Just waiting to be press a button XD
         private void WaitForUser()
         {
             Console.WriteLine("Press Enter to continue...");

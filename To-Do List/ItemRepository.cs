@@ -8,11 +8,14 @@ namespace To_Do_List
     {
         private readonly string path;
 
+        // Saved file path
         public ItemRepository(string path = "items.txt")
         {
             this.path = path;
         }
 
+        
+        // Function of the Items to be loaded, shown and sorted by IDs 
         public List<Item> LoadItems()
         {
             List<Item> items = new List<Item>();
@@ -46,6 +49,8 @@ namespace To_Do_List
             return items;
         }
 
+        
+        // Save's it automatically in the txt file. 
         public void SaveAll(List<Item> items)
         {
             try
@@ -76,6 +81,8 @@ namespace To_Do_List
             }
         }
 
+        // Loads IDs that are being ran in the ram and not from the file (Old tests had ROM saved IDs so there will be 
+        // some inside the txt file but that does not affect the Showing of the RAM loaded ID at all). 
         public int GetNextId()
         {
             // Count the number of items in the file to determine next ID
@@ -84,11 +91,13 @@ namespace To_Do_List
 
             try
             {
+                // Preloads all the Items in the RAM to give them RAM driven ID
                 string[] lines = File.ReadAllLines(path);
                 int count = 0;
 
                 foreach (string line in lines)
                 {
+                    // Counts to give ID
                     if (!string.IsNullOrWhiteSpace(line))
                         count++;
                 }
@@ -101,6 +110,8 @@ namespace To_Do_List
             }
         }
 
+        
+        // Sorting of the Items inside the txt file (Seperation of each side) 
         private string SerializeItem(Item item)
         {
             // ID is not saved to file anymore
@@ -111,6 +122,7 @@ namespace To_Do_List
         {
             try
             {
+                // Does the opposite of the one above. Basically makes it readable and seperates them differntly inside the running App
                 string[] parts = line.Split('|');
 
                 if (parts.Length < 3)
